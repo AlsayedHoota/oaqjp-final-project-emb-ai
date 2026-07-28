@@ -1,27 +1,36 @@
-"""Flask deployment for emotion detector."""
+"""Flask server for the emotion detector."""
 
 from flask import Flask, render_template, request
+
 from EmotionDetection import emotion_detector
 
-app = Flask(__name__)
+app = Flask(__name__)  # pylint: disable=invalid-name
 
 
 @app.route("/")
 def index():
-    """Show home page."""
+    """Display the home page."""
     return render_template("index.html")
 
 
 @app.route("/emotionDetector")
 def detector():
-    """Return emotion analysis."""
-    text = request.args.get("textToAnalyze", "")
-    result = emotion_detector(text)
+    """Analyse the text entered on the page."""
+    text_to_analyze = request.args.get("textToAnalyze", "")
+    result = emotion_detector(text_to_analyze)
 
     if result["dominant_emotion"] is None:
         return "Invalid text! Please try again!"
 
-    return str(result)
+    return (
+        "For the given statement, the system response is "
+        f"'anger': {result['anger']}, "
+        f"'disgust': {result['disgust']}, "
+        f"'fear': {result['fear']}, "
+        f"'joy': {result['joy']} and "
+        f"'sadness': {result['sadness']}. "
+        f"The dominant emotion is {result['dominant_emotion']}."
+    )
 
 
 if __name__ == "__main__":
