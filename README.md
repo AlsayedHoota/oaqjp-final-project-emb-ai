@@ -1,49 +1,33 @@
 # Emotion Detector
 
-This is my final project for the Python AI application course. The app takes a short piece of text and uses the Watson NLP emotion service to check the emotion behind it.
+This is my final project for the Python AI application course. It uses the Watson NLP emotion service to analyse a sentence and return scores for anger, disgust, fear, joy and sadness.
 
-It returns scores for anger, disgust, fear, joy and sadness, then shows which one is the dominant emotion.
+The result also shows the dominant emotion.
 
-## Project files
+## Running the project
 
-- `EmotionDetection/emotion_detection.py` contains the emotion detection function
-- `EmotionDetection/__init__.py` exposes the function so the folder works as a package
-- `test_emotion_detection.py` contains the unit tests
-- `server.py` runs the Flask web application
-- `templates/index.html` contains the page layout
-- `static/mywebscript.js` sends the text to the Flask route
-
-## Running the application
-
-Install the dependencies:
+Install the requirements:
 
 ```bash
 python3 -m pip install -r requirements.txt
 ```
 
-Run the tests:
+Run the unit tests:
 
 ```bash
 python3 test_emotion_detection.py
 ```
 
-Start the Flask application:
+Start the Flask app:
 
 ```bash
 python3 server.py
 ```
 
-The application runs on port `5000`.
+The app runs on port `5000`. The Watson service is available from the Skills Network lab environment.
 
-Run the static code analysis:
+To check the code quality, run:
 
 ```bash
 pylint server.py
 ```
-
-## Note on the Watson NLP service
-
-The emotion service at `sn-watson-emotion.labs.skills.network` is an embedded
-Watson NLP instance that is only reachable from inside the Skills Network Cloud
-IDE. Running the tests or the web application from another network will fail to
-connect to it.
